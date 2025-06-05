@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Criminal Procedure Quiz - Searches and Seizures</title>
+  <style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0e7ff 0%, #f4f6fb 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 48px;
+    color: #2d3a4b;
+    font-size: 2.4em;
+    letter-spacing: 1px;
+  }
+  #quiz {
+    width: 96vw;
+    max-width: 1500px;
+    min-width: 260px;
+    margin: 32px auto 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+    padding: 4vw 3vw 3vw 3vw;
+    box-sizing: border-box;
+    transition: max-width 0.3s, padding 0.3s;
+  }
+  @media (max-width: 1200px) {
+    #quiz {
+      max-width: 90vw;
+      padding: 4vw 2vw 3vw 2vw;
+    }
+  }
+  @media (max-width: 800px) {
+    #quiz {
+      max-width: 98vw;
+      padding: 3vw 1vw 2vw 1vw;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-top: 18px;
+    }
+    .question p {
+      font-size: 1em;
+    }
+    button {
+      font-size: 1em;
+      padding: 10px 18px;
+    }
+  }
+  @media (max-width: 500px) {
+    #quiz {
+      padding: 2vw 1vw 2vw 1vw;
+      border-radius: 8px;
+    }
+    h1 {
+      font-size: 1.1em;
+      margin-top: 8px;
+    }
+  }
+  .question {
+    margin-bottom: 32px;
+  }
+  .question p {
+    font-size: 1.25em;
+    margin-bottom: 12px;
+    color: #2d3a4b;
+    text-align: center;
+  }
+  .question-text {
+    text-align: center;
+    margin-bottom: 10px;
+    white-space: pre-line;
+  }
+  .choices label {
+    display: block;
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: #f7f9fc;
+    transition: background 0.2s, border 0.2s;
+    cursor: pointer;
+    border: 1px solid transparent;
+    word-break: break-word;
+    font-size: 1.08em;
+  }
+  .choices label:hover {
+    background: #e3eaf7;
+    border: 1px solid #b3c6e0;
+  }
+  .choices input[type="radio"] {
+    margin-right: 12px;
+    accent-color: #3a7afe;
+    transform: scale(1.2);
+  }
+  .explanation {
+    display: none;
+    margin-top: 20px;
+    font-style: italic;
+    color: #555;
+    padding: 16px;
+    border-radius: 8px;
+    background: #f6f8fa;
+    border-left: 5px solid #3a7afe;
+    word-break: break-word;
+    white-space: pre-line;
+    font-size: 1.08em;
+    font-weight: normal;
+  }
+  .explanation p {
+    font-size: 1.08em !important;
+    font-weight: normal !important;
+    margin: 0 0 1em 0;
+  }
+  .correct {
+    color: #1a7f37;
+    font-weight: bold;
+  }
+  .incorrect {
+    color: #d7263d;
+    font-weight: bold;
+  }
+  button {
+    margin-top: 24px;
+    padding: 12px 36px;
+    font-size: 1.08em;
+    background: #3a7afe;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(58,122,254,0.08);
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  button:hover {
+    background: #265ecf;
+  }
+  @media (max-width: 900px) {
+    #quiz {
+      max-width: 98vw;
+      padding: 18px 2vw 18px 2vw;
+    }
+    h1 {
+      font-size: 2em;
+    }
+  }
+  </style>
+</head>
+<body>
+  <h1>Criminal Procedure Quiz - Searches and Seizures</h1>
+  <div id="quiz"></div>
+  <div id="progress" style="text-align: center; font-size: 1.2em; margin-top: 16px;"></div>
+  <div id="grade" style="text-align: center; font-size: 1.2em; margin-top: 8px;"></div>
+
+  <script>
+const questions = [
+  {
+    question: `A plainclothes police officer who frequently ate lunch at a certain deli heard rumors that the deli’s owner often placed illegal bets on sporting events. Based on the rumors, the officer peeked into an envelope next to the register and saw betting slips. The officer asked his waitress about the envelope, and she told him that the owner had given it to her and that a man in a brown cap was to pick it up at 2 p.m. The officer stayed at the deli until 2 p.m. and watched the waitress hand the envelope to a man in a brown cap. The officer passed the above information on to a friend in the F.B.I. Several weeks later, based on that information, F.B.I. agents obtained a search warrant for the owner’s home, described in the warrant as a condominium in a large multi-unit complex identified by the street address only. The agents went to the home in the early evening, while the owner was at the deli. After announcing their purpose to the owner’s wife, they searched the home and found betting slips and other materials related to illegal gambling.
+
+The owner was indicted for conspiracy to violate a federal statute prohibiting the use of interstate phone lines to conduct gambling, and for the possession of betting slips.
+
+<p>Which of the following would be the best reason for excluding the evidence found at the owner’s home?`,
+    choices: [
+      "The owner was not home when the warrant was executed.",
+      "The search was conducted in the evening when it easily could have been conducted during daylight hours.",
+      "The warrant failed to specify which condominium unit was to be searched.",
+      "The waitress had never been used before as an informant."
+    ],
+    correct: 2,
+    explanation: "If the warrant was invalid, any evidence obtained thereunder will be excluded. A warrant must be based on a showing of probable cause. When requesting a warrant, officers must submit to a magistrate an affidavit setting forth sufficient underlying circumstances to enable the magistrate to make a determination of probable cause, independent of the officers’ conclusions, that evidence of a crime will be found at the premises. Also, a warrant must describe with reasonable precision the place to be searched and any items to be seized. A finding that a warrant was invalid because it was not supported by probable cause will not entitle the defendant to exclude evidence obtained under the warrant if the police have acted in good faith and reasonable reliance on a facially valid warrant. However, a police officer cannot in good faith rely on a defective search warrant if: (i) the affidavit underlying the warrant is so lacking in probable cause that no reasonable police officer would have relied on it; (ii) the warrant is defective on its face (e.g., it fails to state with particularity the place to be searched or the things to be seized); (iii) the affiant lied to or misled the magistrate; or (iv) the magistrate has wholly abandoned his judicial role. Because the deli owner lives in a condominium, the warrant should have specified which unit in the multi-unit dwelling was to be searched. Because the warrant did not so specify, it failed to describe with sufficient particularity the place to be searched. Such an absence of precision renders the warrant defective on its face, so that the F.B.I. agents cannot be said to have relied in good faith on a facially valid warrant. Thus, the evidence obtained pursuant to this facially defective warrant will be excluded. <p>(A) and (B) each incorrectly imply that there was something wrong with the execution of the warrant. A warrant must be executed by the police without unreasonable delay, with the police knocking and announcing their purpose (unless they reasonably believe that such notice will endanger them or lead to the destruction of evidence). The F.B.I. agents conducted themselves in accordance with these standards. The fact that a warrant was executed in the evening or at a time when a particular person was not on the premises will not invalidate a search conducted pursuant to the warrant. Here, the agents announced themselves to the deli owner’s wife, and they were not required to wait until the owner returned in order to conduct their search. (D) is incorrect because it states a fact that will not, in and of itself, invalidate a warrant and a search pursuant thereto. The sufficiency of a search warrant affidavit based on an informer’s hearsay is evaluated under the totality of the circumstances. The informer’s reliability and credibility, as well as her basis of knowledge, are all elements that may illuminate the issue of probable cause, but they are not strictly separate requirements. Had the waitress been used before as an informant, and been previously found to be reliable, this would have been one factor in determining her present reliability. However, the fact that the waitress had not previously served as an informer does not invalidate the warrant. Given the specificity and accuracy of the waitress’s information (a man in a brown cap would pick it up at 2 p.m.), there was enough of a basis for her information to establish sufficient credibility to permit a magistrate to make a determination of probable cause."
+    
+},
+  {
+    question: `Acting on information from reliable informants that drugs were being sold by residents at a certain fraternity house, the police obtained a search warrant that entitled them to search the entire premises for illegal narcotics. The police arrived at the house when a party was in progress and were admitted to the house by the fraternity president after showing the warrant. Officers proceeded to search the house. In an upstairs bedroom, they found a young woman who was a guest of a fraternity member sleeping on the bed. No one else was in the room. The police found a footlocker under the bed and opened it, finding a variety of illegal drugs. The police then awakened the woman and seized her purse from her. They found a small quantity of marijuana in the purse. The woman was charged with a drug possession offense. At her trial, the prosecution seeks to admit the marijuana seized from her purse over the objection of her attorney.
+
+Should the court admit the marijuana?`,
+    choices: [
+      "Yes, because the footlocker was within the woman's reach.",
+      "Yes, because the woman was present in a room where drugs were found.",
+      "No, because the woman had no possessory interest in the premises.",
+      "No, because the police had no probable cause to believe that the woman had drugs on her person."
+    ],
+    correct: 3,
+    explanation: "The court should not admit the marijuana into evidence because it was obtained as a result of an unreasonable search of the woman. Under the exclusionary rule, evidence obtained in violation of a defendant's Fourth Amendment rights is not admissible to establish the guilt of the defendant at trial. The Fourth Amendment protects against unreasonable searches and seizures by criminal law enforcement agents. To have a protected Fourth Amendment right, a person must have a reasonable expectation of privacy with respect to the place searched or the item seized. For a search based on a search warrant to be constitutionally valid, the warrant must be based on probable cause and must describe with reasonable precision the place to be searched and the items to be seized. A search warrant does not authorize the police to search persons found on the premises who are not named in the warrant. However, if the police have probable cause to arrest a person discovered on the premises to be searched, they may conduct a warrantless search of her incident to the arrest. If a person is not named in the warrant and circumstances justifying an arrest of that person do not exist, the police may search her for the objects named in the search warrant only if they have probable cause to believe that she has the named objects on her person. Here, the search warrant was issued on the basis of information from reliable informants, and it stated precisely the premises (the fraternity house) to be searched and the items (illegal narcotics) to be seized. Thus, the warrant is valid. However, the search warrant (which did not name the woman) did not authorize the police to search the woman's purse. The search cannot be justified as incident to a valid arrest because: (i) the police searched the purse before they arrested the woman, and (ii) the police did not have sufficient probable cause to arrest the woman prior to searching the purse. Because the police had no reason to believe that the woman had drugs on her person, they cannot successfully claim that they were searching for the drugs mentioned in the warrant. The woman can challenge the search because she had a possessory interest and a reasonable expectation of privacy in her purse, which was the object of the search. Thus, because the marijuana was seized pursuant to an unreasonable search in violation of the Fourth Amendment, it must be excluded from evidence. <p> (B) is incorrect because mere presence at a place for which the police have a search warrant does not authorize a search of a person not named in the warrant. Only if the police obtain probable cause to arrest a person on the premises may the person be searched (as incident to the arrest). (A) is incorrect. The footlocker was properly searched pursuant to the warrant, not because it was within the woman's reach. However, the marijuana at issue here was seized as a result of a search of the woman's purse. Thus, the proximity of the woman to the footlocker is of no consequence to the admissibility of the marijuana found in her purse. (C) is incorrect because the woman's lack of a possessory interest in the premises does not invalidate a search of her purse. For example, if the police had probable cause to believe that the woman had drugs on her person, they could have searched her for the drugs, regardless of the fact that she had no possessory interest in the fraternity house."
+  },
+  {
+    question: `An underworld informer advised a police investigator that his neighbor was running an illegal bookmaking operation in his apartment, and that the informer had placed bets with the neighbor at this location. The officer obtained a search warrant, based on his affidavit reciting the foregoing facts, and further stating that the underworld informer was a person who had given him accurate information in previous cases, but whose identity could not be revealed because it might jeopardize other criminal investigations being carried on by the police. Armed with the search warrant, police officers went to the neighbor's apartment. They entered when the neighbor opened the door and searched the apartment. They seized various wagering slips and bookmaking apparatus (described in the search warrant) and placed the neighbor under arrest for illegal gambling. Prior to trial, the neighbor challenges the validity of the search warrant.
+
+Was the search warrant valid?`,
+    choices: [
+      "No, because it was based on hearsay information.",
+      "No, because the officer failed to disclose the identity of the informer, so that the accuracy of his information could not be verified.",
+      "Yes, because the identity of the informer is never required.",
+      "Yes, because the affidavit accompanying it is sufficiently detailed to allow a determination of probable cause."
+    ],
+    correct: 3,
+    explanation: "The search warrant is valid because the affidavit accompanying it is sufficiently detailed to allow a determination of probable cause. A warrant must be based on a showing of probable cause. Along with a request for a warrant, a police officer must submit to a magistrate an affidavit setting forth sufficient underlying circumstances to enable the magistrate to make a determination of probable cause independent of the officer's conclusions. The affidavit may be based on an informer's statements. The sufficiency of the affidavit is evaluated according to the totality of the circumstances. There must be sufficient information for the magistrate to be able to make a common sense evaluation of probable cause. Among the factors determinative of probable cause are the informer's reliability, credibility, and basis of knowledge. Here, the officer's affidavit indicates that the informer has previously proved to be reliable by providing accurate information in other cases. This, in turn, enhances the credibility of the informer. Also, the informer's knowledge is based on his having personally placed bets with the neighbor at his apartment. Thus, the officer's affidavit is supported by sufficient underlying circumstances to allow a magistrate's finding that there was a showing of probable cause. <p>(A) is incorrect because probable cause for issuance of a search warrant may be based on hearsay, if the information comes from a reliable informer. (B) is incorrect because the failure to disclose the identity of the informer does not necessarily invalidate the search warrant. The identity of an informer does not have to be revealed to allow the magistrate to make a determination of probable cause. The magistrate may make this determination based on the police officer's information about the informer showing reliability, credibility, and knowledge. The magistrate need not personally question the informer. (C) is incorrect because it is overbroad. An informer's identity need not be revealed only if there is sufficient other evidence to make a probable cause determination."
+  },
+  {
+    question: `A man was tried in state court for possession of heroin. The prosecution offered in evidence five rolled-up toy balloons containing heroin, which police officers had found on a table in the man's apartment. At a hearing on the defense's motion to suppress, testimony was presented that established that the police had put the apartment under surveillance and had watched a police informant go to the door of the apartment, hand four balloons of heroin to the man, and leave. The police had then knocked on the apartment door, identified themselves as police officers, and demanded entrance. Having heard nothing for 30 seconds, the police had then broken down the door and entered the apartment, discovering the heroin. The police had intended to arrest the man for the purchase of heroin, a felony. When they had gotten inside the apartment, they discovered that the man had left by a back exit. He was later arrested at the nearby newsstand.
+
+The trial court denied the motion to suppress, and the case is on appeal following the man's conviction for possession of heroin.
+
+How should the appellate court rule?`,
+    choices: [
+      "Affirm the conviction on the ground that the error, if any, in admitting the heroin was harmless error.",
+      "Affirm the conviction on the ground that the police complied with the 'knock and announce rule' even though no one was there to admit them.",
+      "Reverse the conviction on the ground that the man's Fourth Amendment rights (as applied to the states by the Fourteenth Amendment) have been violated.",
+      "Reverse the conviction on the ground that the 'knock and announce rule' was not satisfied when the police announced their presence and identity to an empty residence."
+    ],
+    correct: 2,
+    explanation: "The appellate court should reverse the conviction on Fourth Amendment grounds. In Payton v. New York (1980), the United States Supreme Court held that, absent an emergency, a forcible, warrantless entry into a residence for the purpose of making a felony arrest is an unconstitutional violation of the Fourth Amendment as made applicable to the states by the Fourteenth Amendment. No exigent circumstances justified the warrantless arrest or the warrantless entry into the home. If the police had reason to believe the man was destroying evidence, they could have entered the home without a warrant to prevent the destruction under the exigent circumstances doctrine. But nothing in the facts gave the officers reason to believe that evidence was being destroyed. They knocked on the door, identified themselves, and demanded entrance. They heard no response or sounds of drugs being destroyed. Thus, there were no exigent circumstances. Evidence that is the fruit of an unlawful arrest may not be used against the defendant at trial because of the exclusionary rule. <p>(A) is therefore incorrect. (B) and (D) are incorrect because whether or not the 'knock and announce rule' was violated will not affect admissibility of the heroin-the exclusionary rule will not apply to evidence resulting from a search violating that rule."
+  },
+  {
+  question: `A police officer was given a tip about a blonde male living in a nearby trailer park who was selling narcotics. The officer immediately drove to the trailer park and obtained from the manager the names of six blonde males who had trailers or mobile homes in the trailer park. At the first lot, the officer knocked on the defendant's door, announced that he was a police officer, and asked to talk to the defendant. The defendant's girlfriend, who did not live there but had been visiting, told the officer that the defendant would not be back for some time. The officer, believing that the girlfriend lived there, told her that he suspected that the defendant was dealing drugs and asked her if he could look around a little. The girlfriend said, "Sure, why not?" and let the officer in. After seeing nothing in the main living area, he went into the small back bedroom and opened several small storage compartments. In the corner of one of the compartments, he found an opaque bag. On opening it, he observed that it contained what appeared to be marijuana and confiscated the bag. Shortly thereafter, the defendant was arrested and charged with possession of narcotics with intent to distribute, a felony.
+
+On a motion by the defendant's attorney to suppress the introduction of the marijuana into evidence, how is the court likely to rule?
+`,
+  choices: [
+    "For the defendant, because his girlfriend did not live in the trailer.",
+    "For the defendant, because the search exceeded the scope of the consent.",
+    "Against the defendant, because mobile homes fall within the automobile exception to the warrant requirement.",
+    "Against the defendant, because the officer reasonably believed that the defendant's girlfriend lived in the trailer."
+  ],
+  correct: 3,
+  explanation: "The court should deny the defendant's motion because the officer reasonably believed that the defendant's girlfriend lived in the trailer, making the search valid. Under the exclusionary rule, evidence obtained from an unconstitutional search must be excluded from trial. To be valid, searches must be reasonable. The Supreme Court has held that most searches are unreasonable unless the police obtain a warrant before searching. However, there are six categories of searches that the Court has held to be reasonable without a warrant. One such category is searches conducted pursuant to consent. To fall within this exception to the warrant requirement, consent must be given by one who appears to have an apparent right to use or occupy the premises and the search cannot go beyond the scope of the consent given. The consent is valid as long as the police reasonably believed that the person who gave the consent had the authority to do so, and the scope of the consent is limited only to areas to which a reasonable person under the circumstances would believe it extends. Here, the girlfriend's consent was valid because the officer believed that she lived there. His belief appears to be reasonable because she answered the door, knew of the defendant's whereabouts, and readily consented to the search. Therefore, the search was valid under the consent exception and the evidence should not be excluded. <p>(A) is incorrect because consent is not invalid merely because the person who gave it did not actually have authority to do so; the police need only reasonably believe that the person had authority to consent, and as explained above, it was reasonable for the officer to believe that the defendant's girlfriend had authority here. (B) is incorrect because the scope of consent extends to any area where a reasonable person under the circumstances would assume it extends. Because the officer told the girlfriend that he suspected the defendant of dealing drugs, it was reasonable to assume that he was looking for drugs and so would probably look in even small containers. (C) is incorrect because it appears that the defendant's trailer would not fall within the automobile exception. Certain searches of automobiles are excluded from the requirement of a warrant because the Supreme Court has held that people have a lesser expectation of privacy in an automobile than in other areas and automobiles are likely to disappear before a warrant can be acquired. The automobile exception extends not only to cars, but also to other vehicles that are readily mobile and as to which there is a lesser expectation of privacy. However, nothing in the facts here indicates that the defendant's mobile home may readily be moved, and because it appears to be the defendant's regular home rather than a vehicle, it is doubtful that the Court would find the requisite lesser expectation of privacy. Therefore, the trailer would not fall within the automobile exception to the warrant requirement."
+},
+{
+  question: `A suspect was arrested for burglarizing an apartment. He was duly given Miranda warnings, and invoked his right to remain silent. When the suspect was put into the lockup, the police took from him his wallet, watch, and other personal possessions. Following standard procedure, a police officer immediately began to make an inventory of the suspect's personal effects. During the course of the inventory, the officer noticed that the suspect's watch bore an inscription with the name of a person whose apartment had been burglarized two days earlier. The officer concluded that the suspect had probably burglarized that apartment as well as the one for which he was arrested. She reported the inscription on the watch to the detective who had arrested the suspect, and the suspect was subsequently charged with the earlier burglary as well.`,
+  choices: [
+    "Yes, because items to be inventoried may be listed, but they may not be closely examined.",
+    "Yes, because no search warrant was obtained.",
+    "No, because the inventory was a routine procedure of the kind the police normally conduct when an incarceration takes place.",
+    "No, because it gave her probable cause to believe that the suspect had committed the earlier burglary."
+  ],
+  correct: 2,
+  explanation: "Because this was an inventory incident to incarceration, the suspect's rights were not violated. After a valid arrest, the police may make a warrantless search of a defendant's personal effects as part of an established procedure incident to incarceration. This type of search is valid under the Fourth Amendment. Here, it appears that the suspect was validly arrested and incarcerated. Therefore, the officer could inventory the suspect's possessions. Her discovery of the inscription on the watch, as she examined it to inventory it, is within the scope of a valid inventory. <p>(A) is wrong because a valid inventory allows an examination of the items so that they can be properly identified in the inventory. As mentioned, the officer's examination of the watch was within the scope of a valid inventory. (B) is wrong because, as mentioned, a warrant is not required for an inventory incident to incarceration. (D) is wrong because the fact that an item gave rise to probable cause to believe that another crime had been committed cannot be used to justify a search of the item. The item must have been searchable in the first instance."
+},
+{
+  question: `A man on parole after being convicted of possession of cocaine was suspected of selling cocaine out of his home. His parole officer came to his house and rang the bell. As soon as the man opened the door to see who was there, the officer entered the home, despite the man's protests. After searching the home, the parole officer discovered several bags of marijuana in a drawer. The man was arrested and charged with possession of marijuana with intent to sell. A statute in the jurisdiction in which the search took place provides that, as a condition of parole, a parolee is on notice that his parole officer may conduct a search of the parolee's person or home, without probable cause, at any time of the day or night. The man moved to have evidence of the marijuana suppressed by the court, claiming that the state statute that authorized the search was unconstitutional under the Fourth Amendment prohibition of unreasonable searches and seizures.
+Will he prevail?
+`,
+  choices: [
+    "Yes, unless probable cause was established by the officer's tip in conjunction with other circumstances.",
+    "Yes, because a search warrant was not obtained and no exception to the warrant requirement applies.",
+    "No, because the man had a diminished expectation of privacy and the government has a heightened need to search parolees' homes.",
+    "No, because the search was incident to a lawful arrest."
+  ],
+  correct: 2,
+  explanation: "The man will not prevail in his motion to suppress. To be reasonable under the Fourth Amendment, most searches must be pursuant to a warrant. However, several types of inspections and searches do not require a warrant or even probable cause. The Supreme Court has held that the Fourth Amendment is not violated by a statute authorizing warrantless searches of a parolee's home-even absent probable cause-if a statute provides for such searches. The Court reasoned that in such circumstances, the parolee has a diminished expectation of privacy and the government has a heightened need for searching parolees; thus the search is reasonable in a constitutional sense. <p>(A) is incorrect because while probable cause may be based on this type of tip under the 'totality of the circumstances' test, probable cause is not necessary to establish the validity of the search based on the above discussion. (B) is incorrect because a search warrant is not required for a search of a parolee's home that otherwise complies with procedures. (D) is incorrect because this was not a search incident to a constitutionally valid arrest. There was no basis for an arrest until after the search occurred; if the search were not otherwise independently valid, the fact that the man was arrested after the search revealed the drugs would not make the search valid."
+},
+{
+  question: `The police suspected that a young man who had been convicted of burglary and was out of prison on parole had stolen a rare diamond that was on display at a local museum. They went to the young man’s home, where he lived with his mother, the owner of the house. The young man was not at home, but the police asked his mother if they might enter and search the house for the diamond. The mother allowed the police to enter, and she also consented to show them the room where her son slept and kept his personal belongings. There was a locked trunk in the room, and the police asked the mother to open it for them. She told the police that her son had the only key to the trunk, which he always kept locked. She also told them that, as far as she was concerned, they could go ahead and open the trunk if they were able to do so without a key. The police pried the trunk open and found the missing diamond inside.
+Did this constitute a valid search?
+`,
+  choices: [
+    "No, because the police did not inform the mother that she could refuse permission to allow the search.",
+    "No, because the mother did not have authority to consent to the search of the trunk.",
+    "Yes, under the doctrine of parens patriae.",
+    "Yes, because the mother owned the house and thus could consent to the search of the entire premises."
+  ],
+  correct: 1,
+  explanation: "Although the mother, as the owner of the house, had the authority to consent to a search of the house, she had no right to consent to the search of the trunk. A warrantless search by the police is valid if they have a voluntary consent to the search. Any person with equal right to the use or occupation of the property may consent to a search, and any evidence found may be used against the other owners or occupants. The search is valid as long as the police reasonably believed that the consenting party had a right to use or occupy the premises, even if she in fact lacked such right. A parent generally has authority to consent to a search of a child’s room (even an adult child) as long as the parent has access to the room. However, depending on the child’s age, the parent may not have authority to consent to a search of locked containers in the room. Here, the mother owns the house. As the owner, she clearly had the right to the use and occupation of the house and could thus consent to the warrantless police search. However, the fact that her son kept the trunk locked, with the only key in his possession, indicates that he had the exclusive right of use and access to the trunk. Because the mother told the police that the trunk was always locked and that her son had the only key, they could not have reasonably believed that she had a right of use or access to it. Therefore, consent to search the trunk was not given by a person with a right to give such consent. Absent proper consent, the warrantless search of the trunk was invalid. <p>(D) is incorrect because the mother’s ownership of the house does not confer on her a right to use or gain access to the locked trunk. Without such a right, she could not validly consent to a search of the trunk. (A) is incorrect because knowledge of the right to withhold consent is not a prerequisite to establishing a voluntary consent (although it is a factor to be considered). Thus, the failure of the police to inform the mother that she could refuse permission for the search does not automatically invalidate her consent (and the subsequent search). (C) is incorrect. Parens patriae is a doctrine that allows the government to take the role of a parent or guardian of someone who is under a disability (such as minority). As the mother was actually the suspect’s mother, the doctrine has no application here."
+},
+{
+  question: `A public high school’s drug policy strictly prohibited the use, possession, or sale of any drug on school grounds, including any prescription or over-the-counter medication, unless supervised by a nurse. During lunch, the school principal observed a student ingesting two white pills. The student admitted to the principal that the pills were aspirins and had been given to her by a senior. School officials approached the senior and demanded to search her backpack. When no aspirins were found in the backpack, the officials required the senior to submit to a private physical search by the female school nurse. Some aspirins were subsequently found in the waistband of the senior’s gym shorts that she was wearing under her school uniform, and she was suspended. The senior’s mother sued school officials, claiming that the physical search violated her daughter’s Fourth Amendment rights against unreasonable searches and seizures. In response, the school officials filed a motion for summary judgment against the mother’s claim.
+The facts above are stipulated to by the parties. Should the court grant the motion for summary judgment?
+`,
+  choices: [
+    "Yes, because the search revealed that the senior had violated the drug policy.",
+    "Yes, because the school officials had reasonable grounds to believe that the search was necessary.",
+    "No, because the trier of fact could determine that the search was excessively intrusive in light of the nature of the infraction.",
+    "No, because the trier of fact could determine that the school officials did not have probable cause to conduct a physical search based on the uncorroborated statement of a minor."
+  ],
+  correct: 2,
+  explanation: "The motion should be denied. A school search will be upheld only if it offers a moderate chance of finding evidence of wrongdoing, the measures adopted to carry out the search are reasonably related to the objectives of the search, and the search is “not excessively intrusive in light of the age and sex of the student and the nature of the infraction.” [Safford United School District #1 v. Redding (2009)] In the Redding case, school officials were also attempting to locate lawful pain killers believed to be on a student’s person based on an uncorroborated tip from another student. The medication was prohibited on school premises without a doctor’s note on file. The Court concluded that a search of the student’s outer clothing and backpack did not violate the Fourth Amendment. However, a subsequent strip search of the student was unconstitutional. Here, the trier of fact could find that a search of the senior’s gym shorts that she was wearing under her school uniform was excessively intrusive and not reasonably related to the objectives of the search; hence, the school officials should not be entitled to summary judgment. <p>(A) is incorrect. The fact that a search reveals the contraband that prompted the search does not make the search permissible under the Fourth Amendment. (B) is incorrect because, not only must school officials have reasonable grounds for the search, the search must not be excessively intrusive. Because the Court has held that a strip search to locate over-the-counter pain killers was excessively intrusive, summary judgment for the school officials is inappropriate here. (D) is incorrect because the Court has observed that the school setting requires some modification of the level of suspicion of illicit activity needed to justify a search, and has ruled that only reasonable suspicion and not probable cause is required."
+}
+
+];
+
+const quizContainer = document.getElementById("quiz");
+const progressDiv = document.getElementById("progress");
+const gradeDiv = document.getElementById("grade");
+let currentQuestion = 0;
+let score = 0;
+
+function updateProgress(index) {
+  progressDiv.textContent = `Question ${index + 1} of ${questions.length}`;
+}
+
+function updateGrade() {
+  const percent = questions.length === 0 ? 0 : Math.round((score / questions.length) * 100);
+  gradeDiv.textContent = `Answered Correctly: ${score} / ${questions.length} (${percent}%)`;
+}
+
+function showQuestion(index) {
+  quizContainer.innerHTML = ""; // Clear previous content
+  updateProgress(index);
+  updateGrade();
+
+  const q = questions[index];
+  const div = document.createElement("div");
+  div.className = "question";
+
+  // Remove <p> tags from question data and split last sentence for bolding if desired
+  let questionText = q.question.replace(/<p>/g, '').replace(/<\/p>/g, '');
+  const sentences = questionText.trim().split('\n');
+  let mainText = sentences.slice(0, -1).join('\n');
+  let lastSentence = sentences[sentences.length - 1];
+  div.innerHTML = `<p><strong>Question ${index + 1}:</strong></p>
+  <div class="question-text">${mainText}<br><strong>${lastSentence}</strong></div>`;
+
+  const choicesDiv = document.createElement("div");
+  choicesDiv.className = "choices";
+  q.choices.forEach((choice, i) => {
+    const id = `q${index}_c${i}`;
+    const letter = String.fromCharCode(65 + i);
+    const wrapper = document.createElement("label");
+    wrapper.setAttribute("for", id);
+    wrapper.style.display = "block";
+    wrapper.style.cursor = "pointer";
+    wrapper.innerHTML = `<input type='radio' name='q${index}' id='${id}' value='${i}'> <strong>${letter})</strong> ${choice}`;
+    choicesDiv.appendChild(wrapper);
+  });
+
+  const explanation = document.createElement("div");
+  explanation.className = "explanation";
+  explanation.id = `exp${index}`;
+
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = (index + 1 < questions.length) ? "Next" : "Finish";
+  nextBtn.style.display = "none";
+  nextBtn.style.marginTop = "10px";
+
+  let firstAttempt = true; // Track if this is the first attempt
+
+  choicesDiv.addEventListener("change", (event) => {
+    const selected = parseInt(event.target.value);
+    const correct = q.correct;
+    const allChoices = document.getElementsByName(`q${index}`);
+
+    // Reset bolding
+    allChoices.forEach((input, i) => {
+      const label = input.parentElement;
+      label.style.fontWeight = "normal";
+    });
+
+    // Bold the correct answer
+    const correctInput = document.getElementById(`q${index}_c${correct}`);
+    if (selected === correct && correctInput) {
+      correctInput.parentElement.style.fontWeight = "bold";
+    }
+
+    explanation.style.display = "block";
+    if (selected === correct) {
+      explanation.innerHTML = `<span class='correct'>Correct!</span><div>${q.explanation}</div>`;
+      nextBtn.style.display = "inline-block";
+      // Only increment score if this was the first attempt
+      if (firstAttempt) {
+        score++;
+        updateGrade();
+      }
+    } else {
+      explanation.innerHTML = `<span class='incorrect'>Incorrect.</span>`;
+      nextBtn.style.display = "none";
+      firstAttempt = false; // Mark that the first attempt was wrong
+    }
+  });
+
+  nextBtn.onclick = () => {
+    if (index + 1 < questions.length) {
+      currentQuestion = index + 1;
+      showQuestion(currentQuestion);
+    } else {
+      quizContainer.innerHTML = `<h2>Quiz Complete!</h2>
+        <div style="font-size:1.2em;margin-top:16px;">
+          Your score: <strong>${score} / ${questions.length}</strong>
+          <br>
+          Percentage: <strong>${Math.round((score / questions.length) * 100)}%</strong>
+        </div>
+        <button id="restartBtn" style="margin-top:24px;">Restart Quiz</button>
+      `;
+      progressDiv.textContent = "";
+      gradeDiv.textContent = "";
+      document.getElementById("restartBtn").onclick = () => {
+        score = 0;
+        currentQuestion = 0;
+        showQuestion(0);
+      };
+    }
+  };
+
+  div.appendChild(choicesDiv);
+  div.appendChild(explanation);
+  div.appendChild(nextBtn);
+  quizContainer.appendChild(div);
+}
+
+// Start with the first question
+showQuestion(currentQuestion);
+  </script>
+</body>
+</html>
